@@ -8,23 +8,23 @@ class MemoryGame {
 
     shuffleCards(array) {
 
-        for (let i = array.length; i > 0; i--) {
-            const shuffle = Math.floor(Math.ramdom() * (i + 1));
-            array[i] = array[shuffle]
+            this.cards.forEach((array) => {
 
-            return array[shuffle];
+                if (!array) {
+                    return undefined;
+                } else {
+                    return Math.floor(Math.random() * 24);
+                }
+
+            });
+
         }
-        if (!array) {
-            return undefined;
-        }
-
-    }
-
+        // -- --why is not returning, according to test, the suffled(mixed) array of cards ? -- -- >
     checkIfPair(card1, card2) {
-
-        this.pairsClicked += 1
-        if (card1 === card2) {
+        if (card1.dataset.cardname === card2.dataset.cardname) {
             this.pairsGuessed += 1
+            card1.removeEventListener("click", flipcard)
+            card2.removeEventListener("click", flipcard)
             return true;
         } else {
             return false;
